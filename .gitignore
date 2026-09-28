@@ -23,3 +23,17 @@ venv/
 __pycache__/
 .pytest_cache/
 .DS_Store
+
+# 本地解压版 PostgreSQL（二进制、数据目录、日志、deb 包）
+.pgsql/root/
+.pgsql/data/
+.pgsql/debs/
+.pgsql/log/
+.pgsql/*.pid
+
+# 前端构建产物
+frontend/dist/
+
+# Django
+*.sqlite3
+staticfiles/

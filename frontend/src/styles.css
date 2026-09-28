@@ -1,0 +1,351 @@
+:root {
+  --bg: #f4f6fa;
+  --card: #ffffff;
+  --ink: #1f2937;
+  --muted: #6b7280;
+  --line: #e5e7eb;
+  --blue: #2563eb;
+  --blue-soft: #dbeafe;
+  --green: #16a34a;
+  --green-soft: #dcfce7;
+  --amber: #d97706;
+  --amber-soft: #fef3c7;
+  --red: #dc2626;
+  --red-soft: #fee2e2;
+  --slate: #475569;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: "PingFang SC", "Microsoft YaHei", "Noto Sans CJK SC",
+    system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  line-height: 1.55;
+}
+
+.page {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 24px 20px 60px;
+}
+
+.topbar h1 {
+  font-size: 24px;
+  margin: 0 0 6px;
+}
+.subtitle {
+  margin: 0;
+  color: var(--muted);
+  font-size: 14px;
+}
+.synthetic-badge {
+  display: inline-block;
+  margin-left: 8px;
+  padding: 1px 8px;
+  border-radius: 999px;
+  background: var(--amber-soft);
+  color: var(--amber);
+  font-size: 12px;
+}
+
+.election-picker {
+  margin: 18px 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.election-picker select {
+  flex: 1;
+  max-width: 640px;
+  padding: 8px 10px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--card);
+  font-size: 14px;
+}
+
+.section-title {
+  font-size: 17px;
+  margin: 26px 0 12px;
+  padding-left: 10px;
+  border-left: 4px solid var(--blue);
+}
+
+.hint { color: var(--muted); padding: 10px 0; }
+.error-box {
+  background: var(--red-soft);
+  color: var(--red);
+  padding: 10px 14px;
+  border-radius: 8px;
+  margin: 12px 0;
+}
+
+/* ---- 汇总 ---- */
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+.summary-item {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.summary-label { color: var(--muted); font-size: 12px; }
+.summary-value { font-size: 20px; font-weight: 700; }
+.summary-value small { font-size: 12px; font-weight: 400; color: var(--muted); }
+.summary-value.ok { color: var(--green); }
+.summary-value.bad { color: var(--red); }
+
+/* ---- 规则 ---- */
+.rules-panel {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 4px 18px 14px;
+  margin-top: 16px;
+}
+.rules-list {
+  margin: 0;
+  padding-left: 0;
+  list-style: none;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px 22px;
+  font-size: 13.5px;
+}
+.rules-list li em {
+  font-style: normal;
+  color: var(--slate);
+  font-weight: 600;
+}
+.rules-desc { color: var(--muted); font-size: 13px; margin: 10px 0 0; }
+
+/* ---- 轮次卡片 ---- */
+.rounds {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  counter-reset: round;
+}
+.round-card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 16px 18px;
+}
+.round-card.terminal {
+  border-color: var(--green);
+  box-shadow: 0 0 0 2px var(--green-soft);
+}
+.round-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.round-head h3 { margin: 0; font-size: 16px; }
+.round-metrics { display: flex; gap: 8px; flex-wrap: wrap; }
+.metric {
+  font-size: 12px;
+  color: var(--muted);
+  background: #f1f5f9;
+  border-radius: 999px;
+  padding: 3px 10px;
+}
+.metric b { color: var(--ink); font-size: 13px; }
+.metric-warn { background: var(--amber-soft); color: var(--amber); }
+.metric-warn b { color: var(--amber); }
+.metric-strong { background: var(--blue-soft); color: var(--blue); }
+.metric-strong b { color: var(--blue); }
+
+.tag {
+  display: inline-block;
+  font-size: 11px;
+  padding: 1px 8px;
+  border-radius: 999px;
+  margin-left: 8px;
+  vertical-align: middle;
+}
+.elected-tag, .win-tag { background: var(--green-soft); color: var(--green); }
+.out-tag { background: #f1f5f9; color: var(--muted); }
+
+.tally { margin-top: 12px; display: flex; flex-direction: column; gap: 8px; }
+.cand-row {
+  display: grid;
+  grid-template-columns: 150px 1fr 170px;
+  align-items: center;
+  gap: 12px;
+}
+.status-eliminated { opacity: 0.55; }
+.cand-id { display: flex; align-items: center; gap: 8px; }
+.cand-code {
+  font-weight: 700;
+  background: var(--blue-soft);
+  color: var(--blue);
+  border-radius: 6px;
+  padding: 1px 8px;
+  min-width: 28px;
+  text-align: center;
+}
+.cand-name { font-size: 14px; }
+.bar-track {
+  height: 22px;
+  background: #f1f5f9;
+  border-radius: 6px;
+  overflow: hidden;
+}
+.bar-fill {
+  height: 100%;
+  background: #93c5fd;
+  border-radius: 6px;
+  transition: width 0.3s;
+}
+.bar-fill.bar-over { background: var(--green); }
+.cand-votes { font-size: 14px; text-align: right; }
+.cand-votes small { color: var(--muted); margin-left: 4px; font-size: 12px; }
+.over-mark {
+  display: inline-block;
+  margin-left: 6px;
+  font-size: 11px;
+  color: var(--green);
+  background: var(--green-soft);
+  border-radius: 6px;
+  padding: 0 6px;
+}
+.muted { color: var(--muted); }
+
+/* ---- 转移 ---- */
+.transfer-box {
+  margin-top: 14px;
+  border: 1px dashed var(--line);
+  border-radius: 10px;
+  padding: 10px 14px;
+  background: #fbfdff;
+}
+.transfer-box h4 { margin: 0 0 8px; font-size: 14px; }
+.transfer-box h4 small { color: var(--muted); font-weight: 400; margin-left: 8px; }
+.transfer-box ul { list-style: none; margin: 0; padding: 0; }
+.transfer-box li {
+  display: flex;
+  justify-content: space-between;
+  padding: 5px 0;
+  border-bottom: 1px dotted var(--line);
+  font-size: 13.5px;
+}
+.transfer-box li:last-child { border-bottom: none; }
+.flow { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+.flow-code {
+  background: var(--blue-soft);
+  color: var(--blue);
+  border-radius: 6px;
+  padding: 0 7px;
+  font-weight: 600;
+  font-size: 13px;
+}
+.flow-name { color: var(--slate); font-size: 13px; }
+.arrow { color: var(--muted); }
+.flow-exhausted {
+  background: var(--amber-soft);
+  color: var(--amber);
+  border-radius: 6px;
+  padding: 0 8px;
+}
+.flow-votes b { color: var(--ink); }
+li.to-exhausted .flow-votes b { color: var(--amber); }
+.exhausted-delta {
+  margin: 8px 0 0;
+  font-size: 12.5px;
+  color: var(--amber);
+}
+
+.tie-note {
+  margin: 12px 0 0;
+  padding: 8px 12px;
+  background: #fefce8;
+  border-left: 3px solid #eab308;
+  border-radius: 6px;
+  font-size: 13px;
+}
+
+/* ---- 当选横幅 ---- */
+.winner-banner {
+  margin-top: 20px;
+  background: linear-gradient(135deg, #16a34a, #15803d);
+  color: #fff;
+  border-radius: 12px;
+  padding: 16px 20px;
+}
+.winner-name { font-size: 22px; margin-left: 8px; }
+.winner-meta { font-size: 13px; opacity: 0.92; margin-top: 4px; }
+
+/* ---- 选票明细 ---- */
+.ballots-section { margin-top: 22px; }
+.link-button {
+  background: none;
+  border: none;
+  color: var(--blue);
+  cursor: pointer;
+  font-size: 14px;
+  padding: 0;
+}
+.ballot-box { margin-top: 10px; }
+.ballot-filters { display: flex; gap: 8px; margin-bottom: 10px; }
+.chip {
+  border: 1px solid var(--line);
+  background: var(--card);
+  border-radius: 999px;
+  padding: 4px 12px;
+  font-size: 13px;
+  cursor: pointer;
+}
+.chip-on { background: var(--blue); color: #fff; border-color: var(--blue); }
+.ballot-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--card);
+  border-radius: 10px;
+  overflow: hidden;
+  font-size: 13px;
+}
+.ballot-table th, .ballot-table td {
+  text-align: left;
+  padding: 7px 10px;
+  border-bottom: 1px solid var(--line);
+  vertical-align: top;
+}
+.ballot-table th { background: #f8fafc; color: var(--slate); font-weight: 600; }
+.ballot-table code {
+  background: #f1f5f9;
+  border-radius: 5px;
+  padding: 1px 6px;
+  font-size: 12px;
+}
+.row-invalid { background: #fffbeb; }
+.ok-text { color: var(--green); font-size: 12.5px; }
+.bad-text { color: var(--red); font-size: 12.5px; }
+
+.footer {
+  margin-top: 40px;
+  text-align: center;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+@media (max-width: 720px) {
+  .summary-grid { grid-template-columns: repeat(2, 1fr); }
+  .rules-list { grid-template-columns: 1fr; }
+  .cand-row { grid-template-columns: 110px 1fr; }
+  .cand-votes { grid-column: 1 / -1; text-align: left; padding-left: 4px; }
+}
